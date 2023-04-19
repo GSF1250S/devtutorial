@@ -20,7 +20,7 @@ executors:
     working_directory: ~/repo
 
 jobs:
-  validate-content:
+  validate-content-with-AppInspect:
     executor: content-executor
     steps:
       - run:
@@ -57,4 +57,4 @@ workflows:
   version: 2.1
   validate-content-workflow:
     jobs:
-      - Validate-content-with-AppInspect
+      - validate-content-with-AppInspect
