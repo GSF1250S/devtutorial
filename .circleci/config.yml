@@ -34,11 +34,11 @@ jobs:
                 git clone --branch ${CIRCLE_BRANCH} https://${GITHUB_TOKEN}@github.com/GSF1250S/devtutorial.git
             fi
       - run: *apt-install
-      - run:
-          name: Install AppInspect
-          command: |
-            mkdir appinspect-latest
-            cd appinspect-latest
+#      - run:
+#          name: Install AppInspect
+#          command: |
+#            mkdir appinspect-latest
+#            cd appinspect-latest
       - run:
           name: Run AppInspect
           command: |
