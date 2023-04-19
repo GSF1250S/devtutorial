@@ -12,9 +12,8 @@ apt-run: &apt-install
     sudo apt update -qq
     sudo apt install -y python3-pip
     sudo pip install --upgrade pip setuptools
-    sudo pip install virtualenv
 version: 2.1
-
+#    sudo pip install virtualenv
 executors:
   content-executor:
     docker:
@@ -39,9 +38,6 @@ jobs:
           command: |
             mkdir appinspect-latest
             cd appinspect-latest
-            rm -rf venv
-            virtualenv --python=/usr/bin/python3 --clear venv
-            source venv/bin/activate
             pip install splunk-appinspect 
       - run:
           name: Run AppInspect
@@ -49,10 +45,14 @@ jobs:
             rm -rf devtutorial/.git
             rm -rf devtutorial/.circleci
             rm -rf devtutorial/.gitignore
-            cd appinspect-latest
-            source venv/bin/activate
-            splunk-appinspect inspect ../devtutorial --included-tags=cloud 
+            splunk-appinspect inspect ./devtutorial --included-tags=cloud 
 
+#            rm -rf venv
+#            virtualenv --python=/usr/bin/python3 --clear venv
+#            source venv/bin/activate
+
+#            cd appinspect-latest
+#            source venv/bin/activate
 workflows:
   version: 2.1
   validate-content-workflow:
