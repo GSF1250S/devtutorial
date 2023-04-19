@@ -14,14 +14,12 @@ apt-run: &apt-install
   command: |
     sudo apt update -qq
     sudo apt install -y python3-pip
-#    sudo apt install -y python-pip
 version: 2.1
 
 executors:
   content-executor:
     docker:
       - image: cimg/base:stable
-#      - image: circleci/python:latest
     working_directory: ~/repo
 
 jobs:
@@ -36,8 +34,6 @@ jobs:
             else
                 git clone --branch ${CIRCLE_BRANCH} https://${GITHUB_TOKEN}@github.com/GSF1250S/devtutorial.git
             fi
-#      - restore_cache:
-#          key: deps1-{{ .Branch }}-{{ checksum "devtutorial/default/app.conf" }}
       - run: *apt-install
       - run:
           name: install appinspect
@@ -56,12 +52,10 @@ jobs:
             rm -rf devtutorial/.git
             rm -rf devtutorial/.circleci
             rm -rf devtutorial/.gitignore
-            tar -zcvf devtutorial.tar.gz devtutorial
-            mkdir dist
-            cp devtutorial.tar.gz dist/
             cd appinspect-latest
             source venv/bin/activate
             splunk-appinspect inspect ../devtutorial --included-tags=cloud 
+
 workflows:
   version: 2.1
   validate-content-workflow:
