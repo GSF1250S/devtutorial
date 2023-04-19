@@ -12,6 +12,7 @@ apt-run: &apt-install
     sudo apt update -qq
     sudo apt install -y python3-pip
     sudo pip install --upgrade pip setuptools
+    sudo pip install splunk-appinspect 
 version: 2.1
 #    sudo pip install virtualenv
 executors:
@@ -38,7 +39,6 @@ jobs:
           command: |
             mkdir appinspect-latest
             cd appinspect-latest
-            pip install splunk-appinspect 
       - run:
           name: Run AppInspect
           command: |
