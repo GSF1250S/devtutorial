@@ -56,17 +56,14 @@ jobs:
             rm -rf devtutorial/.git
             rm -rf devtutorial/.circleci
             rm -rf devtutorial/.gitignore
-            tar -zcvf devtutorial.tar.gz devtutorial
-            mkdir dist
-            cp devtutorial.tar.gz dist/
+#            tar -zcvf devtutorial.tar.gz devtutorial
+#            mkdir dist
+#            cp devtutorial.tar.gz dist/
             cd appinspect-latest
             source venv/bin/activate
             splunk-appinspect inspect ../devtutorial --included-tags=cloud 
 workflows:
   version: 2.1
-  validate-and-build:
+  validate-content-workflow:
     jobs:
-      - validate-content:
-          filters:
-            tags:
-              only: /.*/
+      - validate-content
