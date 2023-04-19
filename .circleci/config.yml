@@ -4,8 +4,8 @@ version: 2.1
 jobs:
   validate-content-with-AppInspect:
     docker:
-      - image: cimg/python:3.8
-    working_directory: ~/repo
+      - image: cimg/python:3.7
+#    working_directory: ~/repo
     steps:
       - run:
           name: Checkout repository
