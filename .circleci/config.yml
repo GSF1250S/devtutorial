@@ -13,7 +13,8 @@ apt-run: &apt-install
   name: install system packages
   command: |
     sudo apt update -qq
-    sudo apt install -y python-pip
+    sudo apt install -y python3-pip
+#    sudo apt install -y python-pip
 version: 2.1
 
 executors:
@@ -36,8 +37,8 @@ jobs:
 #            else
 #                git clone --branch ${CIRCLE_BRANCH} https://${GITHUB_TOKEN}@GSF1250S/devtutorial.git
 #            fi
-      - restore_cache:
-          key: deps1-{{ .Branch }}-{{ checksum "devtutorial/default/app.conf" }}
+#      - restore_cache:
+#          key: deps1-{{ .Branch }}-{{ checksum "devtutorial/default/app.conf" }}
       - run: *apt-install
       - run:
           name: grab appinspect
