@@ -62,8 +62,8 @@ jobs:
             virtualenv --python=/usr/bin/python3 --clear venv
             source venv/bin/activate
             pip install splunk-appinspect
-#            /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-#            brew install libmagic
+            /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+            brew install libmagic
 #            pip install .
 #            cd appinspect-latest
       - run:
