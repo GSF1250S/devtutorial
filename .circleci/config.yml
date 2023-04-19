@@ -33,9 +33,9 @@ jobs:
           name: checkout repo
           command: |
             if [ "${CIRCLE_BRANCH}" == "" ]; then
-                git clone https://${GITHUB_TOKEN}@GSF1250S/devtutorial.git
+                git clone https://${GITHUB_TOKEN}@github.com/GSF1250S/devtutorial.git
             else
-                git clone --branch ${CIRCLE_BRANCH} https://${GITHUB_TOKEN}@GSF1250S/devtutorial.git
+                git clone --branch ${CIRCLE_BRANCH} https://${GITHUB_TOKEN}@github.com/GSF1250S/devtutorial.git
             fi
 #      - restore_cache:
 #          key: deps1-{{ .Branch }}-{{ checksum "devtutorial/default/app.conf" }}
