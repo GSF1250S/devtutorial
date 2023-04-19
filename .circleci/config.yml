@@ -61,9 +61,7 @@ jobs:
             sudo pip install virtualenv
             virtualenv --python=/usr/bin/python3 --clear venv
             source venv/bin/activate
-            pip install splunk-appinspect
-            /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-            brew install libmagic
+            pip install splunk-appinspect -t . 
 #            pip install .
 #            cd appinspect-latest
       - run:
@@ -72,13 +70,13 @@ jobs:
             rm -rf devtutorial/.git
             rm -rf devtutorial/.circleci
             rm -rf devtutorial/.gitignore
-            tar -zcvf devtutorial.tar.gz devtutorial
-            mkdir dist
-            cp devtutorial.tar.gz dist/
-            cd appinspect-latest
+#            tar -zcvf devtutorial.tar.gz devtutorial
+#            mkdir dist
+#            cp devtutorial.tar.gz dist/
+#            cd appinspect-latest
             source venv/bin/activate
-#            ./bin/splunk-appinspect inspect ../devtutorial
-            splunk-appinspect inspect ../devtutorial.tar.gz --included-tags=cloud 
+            ./bin/splunk-appinspect inspect ../devtutorial
+#            splunk-appinspect inspect ../devtutorial.tar.gz --included-tags=cloud 
       - save_cache:
           key: deps1-{{ .Branch }}-{{ checksum "devtutorial/default/app.conf" }}
           paths:
