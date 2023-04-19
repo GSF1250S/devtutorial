@@ -30,12 +30,12 @@ jobs:
           name: checkout repo
           command: |
             if [ "${CIRCLE_BRANCH}" == "" ]; then
-                git clone https://${GITHUB_TOKEN}@github.com/splunk/TA-osquery.git
+                git clone https://${GITHUB_TOKEN}@GSF1250S/devtutorial.git
             else
-                git clone --branch ${CIRCLE_BRANCH} https://${GITHUB_TOKEN}@github.com/splunk/TA-osquery.git
+                git clone --branch ${CIRCLE_BRANCH} https://${GITHUB_TOKEN}@GSF1250S/devtutorial.git
             fi
       - restore_cache:
-          key: deps1-{{ .Branch }}-{{ checksum "TA-osquery/default/app.conf" }}
+          key: deps1-{{ .Branch }}-{{ checksum "devtutorial/default/app.conf" }}
       - run: *apt-install
       - run:
           name: grab appinspect
@@ -56,36 +56,36 @@ jobs:
       - run:
           name: run appinspect
           command: |
-            rm -rf TA-osquery/.git
-            rm -rf TA-osquery/.circleci
-            rm -rf TA-osquery/.gitignore
-            tar -zcvf TA-osquery.tar.gz TA-osquery
+            rm -rf devtutorial/.git
+            rm -rf devtutorial/.circleci
+            rm -rf devtutorial/.gitignore
+            tar -zcvf devtutorial.tar.gz devtutorial
             mkdir dist
-            cp TA-osquery.tar.gz dist/
+            cp devtutorial.tar.gz dist/
             cd appinspect-latest
             source venv/bin/activate
-            splunk-appinspect inspect ../TA-osquery.tar.gz --included-tags=cloud 
+            splunk-appinspect inspect ../devtutorial.tar.gz --included-tags=cloud 
       - save_cache:
-          key: deps1-{{ .Branch }}-{{ checksum "TA-osquery/default/app.conf" }}
+          key: deps1-{{ .Branch }}-{{ checksum "devtutorial/default/app.conf" }}
           paths:
             - "venv"
       - store_artifacts:
-          path: TA-osquery.tar.gz
-          destination: TA-osquery-latest.tar.gz
+          path: devtutorial.tar.gz
+          destination: devtutorial-latest.tar.gz
       - persist_to_workspace:
           root: dist/
           paths:
-              - TA-osquery.tar.gz
+              - devtutorial.tar.gz
   publish-github-release:
     docker:
       - image: cibuilds/github:0.10
     steps:
       - attach_workspace:
-          at: ~/dist/TA-osquery.tar.gz
+          at: ~/dist/devtutorial.tar.gz
       - run:
           name: publish release on github
           command: |
-            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${CIRCLE_TAG} ~/dist/TA-osquery.tar.gz
+            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${CIRCLE_TAG} ~/dist/devtutorial.tar.gz
 workflows:
   version: 2.1
   validate-and-build:
