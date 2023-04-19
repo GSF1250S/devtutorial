@@ -19,21 +19,23 @@ version: 2.1
 executors:
   content-executor:
     docker:
-      - image: circleci/python:latest
+      - image: cimg/base:stable
+#      - image: circleci/python:latest
     working_directory: ~/repo
 
 jobs:
   validate-content:
     executor: content-executor
     steps:
-      - run:
-          name: checkout repo
-          command: |
-            if [ "${CIRCLE_BRANCH}" == "" ]; then
-                git clone https://${GITHUB_TOKEN}@GSF1250S/devtutorial.git
-            else
-                git clone --branch ${CIRCLE_BRANCH} https://${GITHUB_TOKEN}@GSF1250S/devtutorial.git
-            fi
+      - checkout
+#      - run:
+#          name: checkout repo
+#          command: |
+#            if [ "${CIRCLE_BRANCH}" == "" ]; then
+#                git clone https://${GITHUB_TOKEN}@GSF1250S/devtutorial.git
+#            else
+#                git clone --branch ${CIRCLE_BRANCH} https://${GITHUB_TOKEN}@GSF1250S/devtutorial.git
+#            fi
       - restore_cache:
           key: deps1-{{ .Branch }}-{{ checksum "devtutorial/default/app.conf" }}
       - run: *apt-install
