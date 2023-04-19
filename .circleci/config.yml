@@ -1,14 +1,11 @@
 # CircleCI 2.1 configuration file
-
-executors:
-  content-executor:
-    docker:
-      - image: cimg/base:stable
-    working_directory: ~/repo
+version: 2.1
 
 jobs:
   validate-content-with-AppInspect:
-    executor: content-executor
+    docker:
+      - image: cimg/base:stable
+    working_directory: ~/repo
     steps:
       - run:
           name: Checkout repository
@@ -32,9 +29,3 @@ jobs:
             rm -rf devtutorial/.circleci
             rm -rf devtutorial/.gitignore
             splunk-appinspect inspect ./devtutorial --included-tags=cloud 
-
-workflows:
-  version: 2.1
-  validate-content-workflow:
-    jobs:
-      - validate-content-with-AppInspect
