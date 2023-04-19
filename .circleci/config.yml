@@ -6,7 +6,7 @@ dependencies:
   pre:
     - sudo rm -rf /var/cache/apt/archives && sudo ln -s ~/.apt-cache /var/cache/apt/archives && mkdir -p ~/.apt-cache/partial
 
-apt-run: &apt-install
+install-run: &package-install
   name: Install system packages
   command: |
     sudo apt update -qq
@@ -14,7 +14,7 @@ apt-run: &apt-install
     sudo pip install --upgrade pip setuptools
     sudo pip install splunk-appinspect 
 version: 2.1
-#    sudo pip install virtualenv
+
 executors:
   content-executor:
     docker:
@@ -33,12 +33,7 @@ jobs:
             else
                 git clone --branch ${CIRCLE_BRANCH} https://${GITHUB_TOKEN}@github.com/GSF1250S/devtutorial.git
             fi
-      - run: *apt-install
-#      - run:
-#          name: Install AppInspect
-#          command: |
-#            mkdir appinspect-latest
-#            cd appinspect-latest
+      - run: *package-install
       - run:
           name: Run AppInspect
           command: |
@@ -47,12 +42,6 @@ jobs:
             rm -rf devtutorial/.gitignore
             splunk-appinspect inspect ./devtutorial --included-tags=cloud 
 
-#            rm -rf venv
-#            virtualenv --python=/usr/bin/python3 --clear venv
-#            source venv/bin/activate
-
-#            cd appinspect-latest
-#            source venv/bin/activate
 workflows:
   version: 2.1
   validate-content-workflow:
