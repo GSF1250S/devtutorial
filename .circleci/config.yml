@@ -7,7 +7,7 @@ dependencies:
     - sudo rm -rf /var/cache/apt/archives && sudo ln -s ~/.apt-cache /var/cache/apt/archives && mkdir -p ~/.apt-cache/partial
 
 apt-run: &apt-install
-  name: install system packages
+  name: Install system packages
   command: |
     sudo apt update -qq
     sudo apt install -y python3-pip
@@ -24,7 +24,7 @@ jobs:
     executor: content-executor
     steps:
       - run:
-          name: checkout repo
+          name: Checkout repository
           command: |
             if [ "${CIRCLE_BRANCH}" == "" ]; then
                 git clone https://${GITHUB_TOKEN}@github.com/GSF1250S/devtutorial.git
@@ -33,7 +33,7 @@ jobs:
             fi
       - run: *apt-install
       - run:
-          name: install appinspect
+          name: Install AppInspect
           command: |
             mkdir appinspect-latest
             cd appinspect-latest
@@ -44,7 +44,7 @@ jobs:
             source venv/bin/activate
             pip install splunk-appinspect 
       - run:
-          name: run appinspect
+          name: Run AppInspect
           command: |
             rm -rf devtutorial/.git
             rm -rf devtutorial/.circleci
@@ -57,4 +57,4 @@ workflows:
   version: 2.1
   validate-content-workflow:
     jobs:
-      - validate-content
+      - Validate-content-with-AppInspect
