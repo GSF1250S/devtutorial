@@ -62,27 +62,6 @@ jobs:
             cd appinspect-latest
             source venv/bin/activate
             splunk-appinspect inspect ../devtutorial --included-tags=cloud 
-      - save_cache:
-          key: deps1-{{ .Branch }}-{{ checksum "devtutorial/default/app.conf" }}
-          paths:
-            - "venv"
-      - store_artifacts:
-          path: devtutorial.tar.gz
-          destination: devtutorial-latest.tar.gz
-      - persist_to_workspace:
-          root: dist/
-          paths:
-              - devtutorial.tar.gz
-  publish-github-release:
-    docker:
-      - image: cibuilds/github:0.10
-    steps:
-      - attach_workspace:
-          at: ~/dist/devtutorial.tar.gz
-      - run:
-          name: publish release on github
-          command: |
-            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${CIRCLE_TAG} ~/dist/devtutorial.tar.gz
 workflows:
   version: 2.1
   validate-and-build:
@@ -91,11 +70,3 @@ workflows:
           filters:
             tags:
               only: /.*/
-      - publish-github-release:
-          requires:
-            - validate-content
-          filters:
-            tags:
-              only: /^v.*/
-            branches:
-              ignore: /.*/
