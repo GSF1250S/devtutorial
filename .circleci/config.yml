@@ -33,9 +33,9 @@ jobs:
           name: checkout repo
           command: |
             if [ "${CIRCLE_BRANCH}" == "" ]; then
-                git clone https://${GITHUB_TOKEN}@github.com/GSF1250S/devtutorial.git
+                git clone https://${GITHUB_TOKEN}@GSF1250S/devtutorial.git
             else
-                git clone --branch ${CIRCLE_BRANCH} https://${GITHUB_TOKEN}@github.com/GSF1250S/devtutorial.git
+                git clone --branch ${CIRCLE_BRANCH} https://${GITHUB_TOKEN}@GSF1250S/devtutorial.git
             fi
 #      - restore_cache:
 #          key: deps1-{{ .Branch }}-{{ checksum "devtutorial/default/app.conf" }}
@@ -70,13 +70,12 @@ jobs:
             rm -rf devtutorial/.git
             rm -rf devtutorial/.circleci
             rm -rf devtutorial/.gitignore
-#            tar -zcvf devtutorial.tar.gz devtutorial
-#            mkdir dist
-#            cp devtutorial.tar.gz dist/
-#            cd appinspect-latest
+            tar -zcvf devtutorial.tar.gz devtutorial
+            mkdir dist
+            cp devtutorial.tar.gz dist/
+            cd appinspect-latest
             source venv/bin/activate
-            ./bin/splunk-appinspect inspect ../devtutorial
-#            splunk-appinspect inspect ../devtutorial.tar.gz --included-tags=cloud 
+            splunk-appinspect inspect ../devtutorial.tar.gz --included-tags=cloud 
       - save_cache:
           key: deps1-{{ .Branch }}-{{ checksum "devtutorial/default/app.conf" }}
           paths:
