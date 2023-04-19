@@ -44,7 +44,9 @@ jobs:
           name: grab appinspect
           command: |
             mkdir appinspect-latest
-            pip download -d appinspect-latest splunk-appinspect-2.34.0.tar.gz
+            pip download splunk-appinspect-2.34.0.tar.gz
+#
+#            pip download -d appinspect-latest splunk-appinspect-2.34.0.tar.gz
 #            curl -Ls https://download.splunk.com/misc/appinspect/splunk-appinspect-2.0.0.tar.gz -o appinspect-lastest.tar.gz
 #            tar -zxvf appinspect-lastest.tar.gz -C appinspect-latest --strip-components=1
       - run:
