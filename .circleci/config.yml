@@ -61,7 +61,7 @@ jobs:
             source venv/bin/activate
 #            pip install .
 #            cd appinspect-latest
-- run:
+      - run:
           name: run appinspect
           command: |
             rm -rf devtutorial/.git
