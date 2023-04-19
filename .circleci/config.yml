@@ -11,6 +11,8 @@ apt-run: &apt-install
   command: |
     sudo apt update -qq
     sudo apt install -y python3-pip
+    sudo pip install --upgrade pip setuptools
+    sudo pip install virtualenv
 version: 2.1
 
 executors:
@@ -38,8 +40,8 @@ jobs:
             mkdir appinspect-latest
             cd appinspect-latest
             rm -rf venv
-            sudo pip install --upgrade pip setuptools
-            sudo pip install virtualenv
+#            sudo pip install --upgrade pip setuptools
+#            sudo pip install virtualenv
             virtualenv --python=/usr/bin/python3 --clear venv
             source venv/bin/activate
             pip install splunk-appinspect 
