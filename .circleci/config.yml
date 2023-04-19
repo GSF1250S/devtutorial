@@ -1,10 +1,10 @@
 # CircleCI 2.1 configuration file
 
-dependencies:
-  cache_directories:
-    - "~/.apt-cache"
-  pre:
-    - sudo rm -rf /var/cache/apt/archives && sudo ln -s ~/.apt-cache /var/cache/apt/archives && mkdir -p ~/.apt-cache/partial
+#dependencies:
+#  cache_directories:
+#    - "~/.apt-cache"
+#  pre:
+#    - sudo rm -rf /var/cache/apt/archives && sudo ln -s ~/.apt-cache /var/cache/apt/archives && mkdir -p ~/.apt-cache/partial
 
 install-run: &package-install
   name: Install system packages
