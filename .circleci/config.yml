@@ -28,7 +28,6 @@ jobs:
   validate-content:
     executor: content-executor
     steps:
-#      - checkout
       - run:
           name: checkout repo
           command: |
@@ -40,17 +39,6 @@ jobs:
 #      - restore_cache:
 #          key: deps1-{{ .Branch }}-{{ checksum "devtutorial/default/app.conf" }}
       - run: *apt-install
-#      - run:
-#          name: grab appinspect
-#          command: |
-#            mkdir appinspect-latest
-#            cd appinspect-latest
-#            pip install splunk-appinspect -t .            
-#            pip download splunk-appinspect-2.34.0.tar.gz
-#
-#            pip download -d appinspect-latest splunk-appinspect-2.34.0.tar.gz
-#            curl -Ls https://download.splunk.com/misc/appinspect/splunk-appinspect-2.0.0.tar.gz -o appinspect-lastest.tar.gz
-#            tar -zxvf appinspect-lastest.tar.gz -C appinspect-latest --strip-components=1
       - run:
           name: install appinspect
           command: |
@@ -62,8 +50,6 @@ jobs:
             virtualenv --python=/usr/bin/python3 --clear venv
             source venv/bin/activate
             pip install splunk-appinspect 
-#            pip install .
-#            cd appinspect-latest
       - run:
           name: run appinspect
           command: |
