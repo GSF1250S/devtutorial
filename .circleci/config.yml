@@ -29,3 +29,8 @@ jobs:
             rm -rf devtutorial/.circleci
             rm -rf devtutorial/.gitignore
             splunk-appinspect inspect ./devtutorial --included-tags=cloud 
+
+workflows:
+  validate-content-workflow:
+    jobs:
+      - validate-content-with-AppInspect
