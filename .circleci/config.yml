@@ -61,7 +61,7 @@ jobs:
             sudo pip install virtualenv
             virtualenv --python=/usr/bin/python3 --clear venv
             source venv/bin/activate
-            pip install splunk-appinspect -t . 
+            pip install splunk-appinspect 
 #            pip install .
 #            cd appinspect-latest
       - run:
