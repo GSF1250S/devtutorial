@@ -1,20 +1,5 @@
 # CircleCI 2.1 configuration file
 
-#dependencies:
-#  cache_directories:
-#    - "~/.apt-cache"
-#  pre:
-#    - sudo rm -rf /var/cache/apt/archives && sudo ln -s ~/.apt-cache /var/cache/apt/archives && mkdir -p ~/.apt-cache/partial
-
-install-run: &package-install
-  name: Install system packages
-  command: |
-    sudo apt update -qq
-    sudo apt install -y python3-pip
-    sudo pip install --upgrade pip setuptools
-    sudo pip install splunk-appinspect 
-version: 2.1
-
 executors:
   content-executor:
     docker:
@@ -33,7 +18,13 @@ jobs:
             else
                 git clone --branch ${CIRCLE_BRANCH} https://${GITHUB_TOKEN}@github.com/GSF1250S/devtutorial.git
             fi
-      - run: *package-install
+      - run:
+          name: Install system packages
+          command: |
+            sudo apt update -qq
+            sudo apt install -y python3-pip
+            sudo pip install --upgrade pip setuptools
+            sudo pip install splunk-appinspect
       - run:
           name: Run AppInspect
           command: |
