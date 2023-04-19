@@ -44,7 +44,9 @@ jobs:
           name: grab appinspect
           command: |
             mkdir appinspect-latest
-            pip download splunk-appinspect-2.34.0.tar.gz
+            cd appinspect-latest
+            pip install splunk-appinspect -t .            
+#            pip download splunk-appinspect-2.34.0.tar.gz
 #
 #            pip download -d appinspect-latest splunk-appinspect-2.34.0.tar.gz
 #            curl -Ls https://download.splunk.com/misc/appinspect/splunk-appinspect-2.0.0.tar.gz -o appinspect-lastest.tar.gz
@@ -52,14 +54,14 @@ jobs:
       - run:
           name: install appinspect
           command: |
-            cd appinspect-latest
             rm -rf venv
             sudo pip install --upgrade pip setuptools
             sudo pip install virtualenv
             virtualenv --python=/usr/bin/python2.7 --clear venv
             source venv/bin/activate
-            pip install .
-      - run:
+#            pip install .
+#            cd appinspect-latest
+- run:
           name: run appinspect
           command: |
             rm -rf devtutorial/.git
