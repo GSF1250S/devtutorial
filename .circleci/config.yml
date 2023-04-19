@@ -40,8 +40,6 @@ jobs:
             mkdir appinspect-latest
             cd appinspect-latest
             rm -rf venv
-#            sudo pip install --upgrade pip setuptools
-#            sudo pip install virtualenv
             virtualenv --python=/usr/bin/python3 --clear venv
             source venv/bin/activate
             pip install splunk-appinspect 
