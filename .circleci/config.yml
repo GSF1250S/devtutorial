@@ -40,12 +40,12 @@ jobs:
 #      - restore_cache:
 #          key: deps1-{{ .Branch }}-{{ checksum "devtutorial/default/app.conf" }}
       - run: *apt-install
-      - run:
-          name: grab appinspect
-          command: |
-            mkdir appinspect-latest
-            cd appinspect-latest
-            pip install splunk-appinspect -t .            
+#      - run:
+#          name: grab appinspect
+#          command: |
+#            mkdir appinspect-latest
+#            cd appinspect-latest
+#            pip install splunk-appinspect -t .            
 #            pip download splunk-appinspect-2.34.0.tar.gz
 #
 #            pip download -d appinspect-latest splunk-appinspect-2.34.0.tar.gz
@@ -54,11 +54,14 @@ jobs:
       - run:
           name: install appinspect
           command: |
+            mkdir appinspect-latest
+            cd appinspect-latest
             rm -rf venv
             sudo pip install --upgrade pip setuptools
             sudo pip install virtualenv
-            virtualenv --python=/usr/bin/python2.7 --clear venv
+            virtualenv --python=/usr/bin/python3 --clear venv
             source venv/bin/activate
+            pip install splunk-appinspect -t . 
 #            pip install .
 #            cd appinspect-latest
       - run:
