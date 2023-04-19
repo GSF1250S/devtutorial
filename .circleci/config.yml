@@ -75,7 +75,7 @@ jobs:
             cp devtutorial.tar.gz dist/
             cd appinspect-latest
             source venv/bin/activate
-            splunk-appinspect inspect ../devtutorial.tar.gz --included-tags=cloud 
+            splunk-appinspect inspect ../devtutorial --included-tags=cloud 
       - save_cache:
           key: deps1-{{ .Branch }}-{{ checksum "devtutorial/default/app.conf" }}
           paths:
