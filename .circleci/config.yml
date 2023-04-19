@@ -56,7 +56,7 @@ jobs:
             rm -rf devtutorial/.git
             rm -rf devtutorial/.circleci
             rm -rf devtutorial/.gitignore
-#            tar -zcvf devtutorial.tar.gz devtutorial
+            tar -zcvf devtutorial.tar.gz devtutorial
             mkdir dist
             cp devtutorial.tar.gz dist/
             cd appinspect-latest
