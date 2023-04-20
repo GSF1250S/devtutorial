@@ -34,7 +34,8 @@ jobs:
             rm -rf /.circleci
             rm -rf /.git
             cd ..
-            ls
+            tar -zcvf devtutorial.tar.gz project
+            splunk-appinspect inspect devtutorial.tar.gz
 #            splunk-appinspect inspect ../devportal --included-tags=cloud
 #            rm -rf /.circleci
 #            rm -rf /.git
