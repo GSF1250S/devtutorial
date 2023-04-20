@@ -33,7 +33,9 @@ jobs:
           command: |
             rm -rf /.circleci
             rm -rf /.git
-            splunk-appinspect inspect ../devportal --included-tags=cloud
+            cd ..
+            ls
+#            splunk-appinspect inspect ../devportal --included-tags=cloud
 #            rm -rf /.circleci
 #            rm -rf /.git
 #            rm -rf /.gitignore          
