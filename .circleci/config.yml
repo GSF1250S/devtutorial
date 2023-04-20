@@ -26,10 +26,13 @@ jobs:
       - run:
           name: Run AppInspect
           command: |
-            rm -rf devtutorial/.git
-            rm -rf devtutorial/.circleci
-            rm -rf devtutorial/.gitignore
-            ls
+            rm -rf /.git
+            rm -rf /.circleci
+            rm -rf /.gitignore          
+#            rm -rf devtutorial/.git
+#            rm -rf devtutorial/.circleci
+#            rm -rf devtutorial/.gitignore
+#            ls
 #            splunk-appinspect inspect ./devtutorial --included-tags=cloud 
 
 workflows:
