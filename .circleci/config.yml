@@ -7,14 +7,15 @@ jobs:
       - image: cimg/python:3.7
 #    working_directory: ~/repo
     steps:
-      - run:
-          name: Checkout repository
-          command: |
-            if [ "${CIRCLE_BRANCH}" == "" ]; then
-                git clone https://${GITHUB_TOKEN}@github.com/GSF1250S/devtutorial.git
-            else
-                git clone --branch ${CIRCLE_BRANCH} https://${GITHUB_TOKEN}@github.com/GSF1250S/devtutorial.git
-            fi
+      - checkout
+#      - run:
+#          name: Checkout repository
+#          command: |
+#            if [ "${CIRCLE_BRANCH}" == "" ]; then
+#                git clone https://${GITHUB_TOKEN}@github.com/GSF1250S/devtutorial.git
+#            else
+#                git clone --branch ${CIRCLE_BRANCH} https://${GITHUB_TOKEN}@github.com/GSF1250S/devtutorial.git
+#            fi
       - run:
           name: Install system packages
           command: |
