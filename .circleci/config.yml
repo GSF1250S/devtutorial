@@ -26,9 +26,10 @@ jobs:
       - run:
           name: Run AppInspect
           command: |
-            rm -rf /.git
             rm -rf /.circleci
-            rm -rf /.gitignore          
+            splunk-appinspect inspect . --included-tags=cloud
+#            rm -rf /.git
+#            rm -rf /.gitignore          
 #            rm -rf devtutorial/.git
 #            rm -rf devtutorial/.circleci
 #            rm -rf devtutorial/.gitignore
