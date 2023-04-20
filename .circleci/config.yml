@@ -31,9 +31,9 @@ jobs:
       - run:
           name: Run AppInspect
           command: |
-            rm -rf /.circleci
-            rm -rf /.git
             cd ..
+            rm -rf project/.circleci
+            rm -rf project/.git
             tar -zcvf devtutorial.tar.gz project
             splunk-appinspect inspect devtutorial.tar.gz
 #            splunk-appinspect inspect ../devportal --included-tags=cloud
