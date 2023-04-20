@@ -17,10 +17,12 @@ jobs:
       - run:
           name: Install system packages
           command: |
+            sudo apt install -y python3-pip
             sudo pip install splunk-appinspect
 #            sudo apt update -qq
 #            sudo apt install -y python3-pip
 #            sudo pip install --upgrade pip setuptools
+#            sudo pip install splunk-appinspect
       - run:
           name: Run AppInspect
           command: |
