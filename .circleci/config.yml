@@ -6,21 +6,14 @@ version: 2.1
 # See: https://circleci.com/docs/configuration-reference/#jobs
 jobs:
   validate-content-with-AppInspect:
-# Specify the execution environment. You can specify an image from Docker Hub or use one of our convenience images from CircleCI's Developer Hub.
-# See: https://circleci.com/docs/configuration-reference/#executor-job
+    # Specify the execution environment. You can specify an image from Docker Hub or use one of our convenience images from CircleCI's Developer Hub.
+    # See: https://circleci.com/docs/configuration-reference/#executor-job
     docker:
       - image: cimg/python:3.7
-#    working_directory: ~/repo
+    # Add steps to the job
+    # See: https://circleci.com/docs/configuration-reference/#steps
     steps:
       - checkout
-#      - run:
-#          name: Checkout repository
-#          command: |
-#            if [ "${CIRCLE_BRANCH}" == "" ]; then
-#                git clone https://${GITHUB_TOKEN}@github.com/GSF1250S/devtutorial.git
-#            else
-#                git clone --branch ${CIRCLE_BRANCH} https://${GITHUB_TOKEN}@github.com/GSF1250S/devtutorial.git
-#            fi
       - run:
           name: Install system packages
           command: |
@@ -36,15 +29,6 @@ jobs:
             rm -rf project/.git
             tar -zcvf devtutorial.tar.gz project
             splunk-appinspect inspect devtutorial.tar.gz
-#            splunk-appinspect inspect ../devportal --included-tags=cloud
-#            rm -rf /.circleci
-#            rm -rf /.git
-#            rm -rf /.gitignore          
-#            rm -rf devtutorial/.git
-#            rm -rf devtutorial/.circleci
-#            rm -rf devtutorial/.gitignore
-#            ls
-#            splunk-appinspect inspect ./devtutorial --included-tags=cloud 
 
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
