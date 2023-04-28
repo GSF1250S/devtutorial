@@ -5,37 +5,22 @@ version: 2.1
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/configuration-reference/#jobs
 jobs:
-  validate-content-with-AppInspect:
+  say-hello:
     # Specify the execution environment. You can specify an image from Docker Hub or use one of our convenience images from CircleCI's Developer Hub.
     # See: https://circleci.com/docs/configuration-reference/#executor-job
     docker:
-      - image: cimg/python:3.7
+      - image: cimg/base:stable
     # Add steps to the job
     # See: https://circleci.com/docs/configuration-reference/#steps
     steps:
       - checkout
       - run:
-          name: Install system packages
-          command: |
-            sudo apt update -qq
-            sudo apt install -y python3-pip
-            sudo pip install splunk-appinspect
-#            sudo apt update -qq
-#            sudo apt install -y python3-pip
-#            sudo pip install --upgrade pip setuptools
-#            sudo pip install splunk-appinspect
-      - run:
-          name: Run AppInspect
-          command: |
-            cd ..
-            rm -rf project/.circleci
-            rm -rf project/.git
-            tar -zcvf devtutorial.tar.gz project
-            splunk-appinspect inspect devtutorial.tar.gz
+          name: "Say hello"
+          command: "echo Hello, World!"
 
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
 workflows:
-  validate-content-workflow:
+  say-hello-workflow:
     jobs:
-      - validate-content-with-AppInspect
+      - say-hello
